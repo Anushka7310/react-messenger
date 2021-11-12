@@ -6,7 +6,8 @@ function Message(message, username) {
     const isUser = username === message.username;
 
     return (
-       <Card className={`message ${isUser && 'message_user'}`}>
+        <div>
+        <Card className={isUser ? "message_userCard" : "message_guestCard" }>
             <CardContent>
                 <Typography
                 color="white"
@@ -17,8 +18,7 @@ function Message(message, username) {
             </Typography>
             </CardContent>
         </Card>  
-        
-    )
+        </div>    )
 }
 
 export default Message
