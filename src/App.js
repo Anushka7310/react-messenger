@@ -4,6 +4,7 @@ import { Button, FormControl, InputLabel, Input } from '@material-ui/core';
 import Message from './Message';
 import db from './firebase';
 import firebase from "firebase/compat/app";
+import FlipMove from 'react-flip-move';
 
 function App() {
   const [input, setInput] = useState(''); 
@@ -22,7 +23,7 @@ function App() {
   .orderBy('timestamp', 'desc')
   .onSnapshot(snapshot => {
     setMessages(snapshot.docs.map(doc => doc.data()))
-  })
+  });
 
   }, [] )
 
@@ -61,6 +62,8 @@ function App() {
         <Button diasabled={!input} variant="contained" color="primary" type='submit' onClick={sendMessage}> Send Message</Button>
       </FormControl>
       </form>
+
+<FlipMove>
   
   {
    messages.map(message => (
@@ -68,6 +71,8 @@ function App() {
    
   ))
   }
+  </FlipMove>
+  
     </div>
   );
 }
