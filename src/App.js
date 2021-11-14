@@ -5,12 +5,12 @@ import Message from './Message';
 import db from './firebase';
 import firebase from "firebase/compat/app";
 import FlipMove from 'react-flip-move';
+import SendIcon from '@mui/icons-material/Send';
+import { IconButton } from '@mui/material';
 
 function App() {
   const [input, setInput] = useState(''); 
-  const [messages, setMessages] = useState([
-  
-]);
+  const [messages, setMessages] = useState([]);
   const [username, setUsername]= useState('');
 
   //useState= varaiable in React
@@ -30,12 +30,9 @@ function App() {
   useEffect(() => {
   //const username = prompt ('Please enter your name')
   setUsername(prompt('Please enter your name'))
-
-
   }, [] ) //condition
 
-  console.log(input);
-  console.log(messages);
+
   
   const sendMessage = (event) => {
     event.preventDefault();
@@ -46,21 +43,25 @@ function App() {
     timestamp: firebase.firestore.FieldValue.serverTimestamp()
   })
     
-    setMessages([...messages,{username: username, text: input}]);
+    //setMessages([...messages,{username: username, message: input}]);
     setInput('');
   }
 
 
   return (
     <div className="App">
-      <h1>Hello </h1>
+      <h1>Hello {username}</h1>
     
       <form className= "app_form">
-      <FormControl>
-        <InputLabel>Enter a message...</InputLabel>
-        <Input value={input} onChange={event => setInput(event.target.value)} />
-        <Button diasabled={!input} variant="contained" color="primary" type='submit' onClick={sendMessage}> Send Message</Button>
+      <FormControl className="app_formControl">
+      
+        <Input className="app_input" placeholder= 'Enter a message...' value={input} onChange={event => setInput(event.target.value)} />
+        < IconButton className="app_iconButton" diasabled={!input} variant="contained" color="primary" type='submit' onClick={sendMessage}>
+        <SendIcon />
+        
+        </IconButton>
       </FormControl>
+      
       </form>
 
 <FlipMove>
